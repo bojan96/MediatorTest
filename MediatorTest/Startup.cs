@@ -34,6 +34,7 @@ namespace MediatorTest
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
             services.AddTransient<IPipelineBehavior<PostRequest, Post>, BodyBehavior>();
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LogBehavior<,>));
             services.AddHttpClient("Post", config =>
             {
                 config.BaseAddress = new Uri($"{Configuration.GetValue<string>("PlaceholderApiUrl")}/posts/");
